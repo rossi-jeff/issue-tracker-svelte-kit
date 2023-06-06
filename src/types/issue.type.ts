@@ -1,4 +1,6 @@
 import type { BaseModelType } from './base-model.type';
+import type { ProjectType } from './project.type';
+import type { UserType } from './user.type';
 
 export type IssueType = BaseModelType & {
 	Title?: string;
@@ -8,4 +10,7 @@ export type IssueType = BaseModelType & {
 	Priority?: string;
 	Complexity?: string;
 	SequenceNumber?: string;
+	Author?: UserType;
+	AssignedTo?: UserType;
+	Project?: ProjectType;
 };

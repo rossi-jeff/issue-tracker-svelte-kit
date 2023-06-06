@@ -1,7 +1,13 @@
 <script>
+	import TimeClockCard from './time-clock-card.svelte';
+
 	export let data;
 </script>
 
 <h1>Time Clocks</h1>
 
-<div>{JSON.stringify(data)}</div>
+{#each data.timeclocks as timeClock}
+	<TimeClockCard {timeClock} />
+{:else}
+	<div>No Time Clocks</div>
+{/each}
