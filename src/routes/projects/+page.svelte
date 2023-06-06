@@ -1,7 +1,13 @@
 <script>
+	import ProjectCard from './project-card.svelte';
+
 	export let data;
 </script>
 
 <h1>Projects</h1>
 
-<div>{JSON.stringify(data)}</div>
+{#each data.projects as project}
+	<ProjectCard {project} />
+{:else}
+	<div>No Projects</div>
+{/each}
