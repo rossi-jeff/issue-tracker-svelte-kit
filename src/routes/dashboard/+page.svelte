@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import type { IssueType } from '../../types/issue.type.js';
+	import DashboardIssueCard from './dashboard-issue-card.svelte';
 
 	export let data;
 
@@ -43,34 +44,44 @@
 <h1>Dashboard</h1>
 
 <div class="flex flex-wrap justify-between">
-	<div>
+	<div class="w-[23%]">
 		<h2>New</h2>
-		{#each sorted['new'] as issue}
-			<div>{issue.SequenceNumber}</div>
-		{/each}
+		<div class="dashboard-column">
+			{#each sorted['new'] as issue}
+				<DashboardIssueCard {issue} />
+			{/each}
+		</div>
 	</div>
-	<div>
+	<div class="w-[23%]">
 		<h2>Assigned</h2>
-		{#each sorted['assigned'] as issue}
-			<div>{issue.SequenceNumber}</div>
-		{/each}
+		<div class="dashboard-column">
+			{#each sorted['assigned'] as issue}
+				<DashboardIssueCard {issue} />
+			{/each}
+		</div>
 	</div>
-	<div>
+	<div class="w-[23%]">
 		<h2>Accepted</h2>
-		{#each sorted['accepted'] as issue}
-			<div>{issue.SequenceNumber}</div>
-		{/each}
+		<div class="dashboard-column">
+			{#each sorted['accepted'] as issue}
+				<DashboardIssueCard {issue} />
+			{/each}
+		</div>
 	</div>
-	<div>
+	<div class="w-[23%]">
 		<h2>Fixed</h2>
-		{#each sorted['fixed'] as issue}
-			<div>{issue.SequenceNumber}</div>
-		{/each}
+		<div class="dashboard-column">
+			{#each sorted['fixed'] as issue}
+				<DashboardIssueCard {issue} />
+			{/each}
+		</div>
 	</div>
 </div>
-<div>
+<div class="min-w-fit">
 	<h2>Other</h2>
-	{#each sorted['other'] as issue}
-		<div>{issue.SequenceNumber}</div>
-	{/each}
+	<div class="max-h-96 overflow-y-auto p-2">
+		{#each sorted['other'] as issue}
+			<DashboardIssueCard {issue} />
+		{/each}
+	</div>
 </div>
