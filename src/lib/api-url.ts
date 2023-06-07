@@ -1,1 +1,1 @@
-export const apiUrl = 'https://issue-tracker-api.jeff-rossi.com/';
+export const apiUrl = 'https://issue-tracker-api.jeff-rossi.com';

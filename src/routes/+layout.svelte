@@ -11,4 +11,6 @@
 	<a href="/time_clocks">Time Clocks</a>
 </div>
 
-<slot />
+<div class="p-4">
+	<slot />
+</div>

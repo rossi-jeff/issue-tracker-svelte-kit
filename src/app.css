@@ -1,3 +1,38 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.card {
+	@apply border border-black rounded p-2 mb-2 min-w-fit;
+}
+
+h1 {
+	@apply text-2xl font-extrabold mb-2;
+}
+h2 {
+	@apply text-xl font-bold mb-2;
+}
+h3 {
+	@apply text-lg font-bold mb-2;
+}
+.dashboard-column {
+	@apply max-h-96 overflow-y-auto px-1;
+}
+.dashboard-main-content {
+	@apply my-1 border border-dotted border-slate-500 p-2 hidden;
+}
+.dashboard-details,
+.dashboard-description {
+	@apply p-2 hidden;
+}
+.dashboard-main-content.open,
+.dashboard-details.open,
+.dashboard-description.open {
+	@apply block transition;
+}
+button.dashboard {
+	@apply bg-slate-200 border border-black text-left font-bold py-1 px-2 w-full mb-1;
+}
+strong.dashboard {
+	@apply inline-block w-24;
+}
