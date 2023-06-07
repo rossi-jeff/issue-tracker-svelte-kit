@@ -1,3 +1,4 @@
+import { browser } from '$app/environment';
 import { writable } from 'svelte/store';
 
 export type UserSessionType = {
@@ -20,7 +21,7 @@ export const blankUserSession: UserSessionType = {
 
 export const UserSessionKey = 'svelte-issue-tracker-session';
 
-const stored = localStorage.getItem(UserSessionKey);
+const stored = browser ? localStorage.getItem(UserSessionKey) : null;
 
 const initial = stored ? JSON.parse(stored) : blankUserSession;
 

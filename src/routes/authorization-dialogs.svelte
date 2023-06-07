@@ -1,5 +1,16 @@
 <script lang="ts">
+	import { get } from 'svelte/store';
+	import { apiUrl } from '../lib/api-url';
+	import {
+		UserSessionKey,
+		userSession,
+		type UserSessionType,
+		blankUserSession
+	} from '../lib/user-session.writable';
 	import type { CredentialsType } from '../types/credentials.type';
+	import { browser } from '$app/environment';
+	let credentials: CredentialsType = {};
+	let session: UserSessionType = get(userSession);
 
 	const showOverlay = () => {
 		const overlay = document.getElementById('authorization-overlay');
@@ -23,11 +34,47 @@
 		hideOverlay();
 	};
 
-	let credentials: CredentialsType = {};
+	const signIn = async () => {
+		const { Username, Password } = credentials;
+		if (!Username || !Password) return;
+		const result = await fetch(`${apiUrl}/auth/login`, {
+			method: 'POST',
+			body: JSON.stringify({ Username, Password }),
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		});
+		if (result.ok) {
+			const { Name, SessionId, Token, UUID, UserName } = await result.json();
+			const newSession: UserSessionType = {
+				Name,
+				SessionId,
+				Token,
+				UUID,
+				UserName,
+				signedIn: true
+			};
+			if (browser) localStorage.setItem(UserSessionKey, JSON.stringify(newSession));
+			userSession.set(newSession);
+			session = get(userSession);
+			hideSignIn();
+		} else console.log(result);
+	};
+
+	const signOut = () => {
+		userSession.set(blankUserSession);
+		localStorage.removeItem(UserSessionKey);
+		session = get(userSession);
+	};
 </script>
 
 <div class="flex flex-wrap justify-end mx-4 my-2">
-	<button class="ml-4" on:click={showSignIn}>Sign In</button>
+	{#if session.signedIn}
+		<strong>{session.UserName}</strong>
+		<button on:click={signOut} class="ml-4">Sign Out</button>
+	{:else}
+		<button class="ml-4" on:click={showSignIn}>Sign In</button>
+	{/if}
 </div>
 
 <div class="modal-overlay" id="authorization-overlay">
@@ -45,8 +92,12 @@
 			</div>
 		</div>
 		<div class="flex flex-wrap justify-between">
-			<button on:click={hideSignIn}>Cancel</button>
-			<button>Sign In</button>
+			<div>
+				<button on:click={hideSignIn}> Cancel </button>
+			</div>
+			<div>
+				<button on:click={signIn}>Sign In</button>
+			</div>
 		</div>
 	</div>
 </div>
