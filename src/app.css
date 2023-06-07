@@ -36,3 +36,16 @@ button.dashboard {
 strong.dashboard {
 	@apply inline-block w-24;
 }
+.modal-overlay {
+	@apply fixed inset-0 bg-gray-500 bg-opacity-70 overflow-y-auto w-full h-full hidden;
+}
+.modal-40 {
+	@apply w-[40%] card bg-white mx-auto hidden relative top-24;
+}
+.modal-overlay.open,
+.modal-40.open {
+	@apply block transition-all;
+}
+.modal-40 input {
+	@apply border border-black rounded px-2 py-1 w-full;
+}
