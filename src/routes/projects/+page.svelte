@@ -6,6 +6,8 @@
 	import ProjectDialogs from './project-dialogs.svelte';
 	import { userSession, type UserSessionType } from '../../lib/user-session.writable';
 	import { get } from 'svelte/store';
+	import { apiUrl } from '../../lib/api-url';
+	import { buildHeaders } from '../../lib/build-headers';
 
 	export let data;
 
@@ -42,16 +44,36 @@
 		}, 25);
 	};
 
-	const createProject = (ev: any) => {
-		console.log('createProject');
-		console.log({ ev });
-		hideNew();
+	const createProject = async (ev: any) => {
+		const {
+			project: { Name, Details }
+		} = ev.detail;
+		const result = await fetch(`${apiUrl}/project`, {
+			method: 'POST',
+			body: JSON.stringify({ Name, Details }),
+			headers: buildHeaders(session)
+		});
+		if (result.ok) {
+			const project = await result.json();
+			console.log({ project });
+			hideNew();
+		} else hideNew();
 	};
 
-	const updateProject = (ev: any) => {
-		console.log('updateProject');
-		console.log({ ev });
-		hideEdit();
+	const updateProject = async (ev: any) => {
+		const {
+			project: { Name, Details, UUID }
+		} = ev.detail;
+		const result = await fetch(`${apiUrl}/project/${UUID}`, {
+			method: 'PATCH',
+			body: JSON.stringify({ Name, Details }),
+			headers: buildHeaders(session)
+		});
+		if (result.ok) {
+			const project = await result.json();
+			console.log({ project });
+			hideEdit();
+		} else hideEdit();
 	};
 
 	const editProject = (ev: any) => {
