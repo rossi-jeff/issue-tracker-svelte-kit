@@ -42,10 +42,18 @@ strong.dashboard {
 .modal-40 {
 	@apply w-[40%] card bg-white mx-auto hidden relative top-24;
 }
+.modal-50 {
+	@apply w-[50%] card bg-white mx-auto hidden relative top-24;
+}
 .modal-overlay.open,
-.modal-40.open {
+.modal-40.open,
+.modal-50.open {
 	@apply block transition-all;
 }
-.modal-40 input {
+.modal-40 input,
+.modal-50 input {
 	@apply border border-black rounded px-2 py-1 w-full;
+}
+.modal-50 textarea {
+	@apply border border-black rounded px-2 py-1 w-full h-24;
 }
