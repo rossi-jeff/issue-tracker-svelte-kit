@@ -1,8 +1,11 @@
 <script>
 	import '../app.css';
+	import AuthorizationDialogs from './authorization-dialogs.svelte';
 </script>
 
-<div class="flex flex-wrap justify-between mx-4 my-4">
+<AuthorizationDialogs />
+
+<div class="flex flex-wrap justify-between mx-4 mb-4">
 	<a href="/">Home</a>
 	<a href="/dashboard">Dashboard</a>
 	<a href="/projects">Projects</a>
