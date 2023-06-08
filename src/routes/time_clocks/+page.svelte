@@ -7,6 +7,8 @@
 	import type { IssueType } from '../../types/issue.type';
 	import type { ProjectType } from '../../types/project.type';
 	import TimeClockFilters from './time-clock-filters.svelte';
+	import { userSession, type UserSessionType } from '../../lib/user-session.writable';
+	import { get } from 'svelte/store';
 
 	export let data;
 
@@ -19,6 +21,19 @@
 	let users: UserType[] = [];
 	let issues: IssueType[] = [];
 	let projects: ProjectType[] = [];
+
+	let session: UserSessionType = get(userSession);
+
+	const editor: { [key: string]: TimeClockType } = {
+		new: {
+			Start: {},
+			End: {}
+		},
+		edit: {
+			Start: {},
+			End: {}
+		}
+	};
 
 	const setPaginated = () => {
 		paginated = data.timeclocks.slice(offset, offset + limit);
@@ -55,6 +70,19 @@
 		}
 	};
 
+	const editTimeClock = (ev: any) => {
+		const { UUID } = ev.detail;
+		console.log('editTimeClock', UUID);
+		editor.edit = data.timeclocks.find((t: TimeClockType) => t.UUID == UUID);
+		showEdit();
+	};
+
+	let hideNew = () => {};
+
+	let showEdit = () => {};
+
+	let hideEdit = () => {};
+
 	onMount(() => {
 		count = data.timeclocks.length;
 		users = data.users;
@@ -68,10 +96,19 @@
 
 <h1>Time Clocks</h1>
 
-<TimeClockFilters {users} {issues} {projects} on:filterTimeClocks={filterTimeClocks} />
+<TimeClockFilters
+	{users}
+	{issues}
+	{projects}
+	{editor}
+	on:filterTimeClocks={filterTimeClocks}
+	bind:showEdit
+	bind:hideEdit
+	bind:hideNew
+/>
 
 {#each paginated as timeClock}
-	<TimeClockCard {timeClock} />
+	<TimeClockCard {timeClock} on:editTimeClock={editTimeClock} />
 {:else}
 	<div>No Time Clocks</div>
 {/each}

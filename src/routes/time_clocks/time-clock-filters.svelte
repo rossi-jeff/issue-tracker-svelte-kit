@@ -5,16 +5,23 @@
 	import type { UserType } from '../../types/user.type';
 	import { getFullName } from '../../lib/get-full-name';
 	import { apiUrl } from '../../lib/api-url';
+	import { userSession, type UserSessionType } from '../../lib/user-session.writable';
+	import { get } from 'svelte/store';
+	import type { TimeClockType } from '../../types/time-clock.type';
+	import TimeClockForm from './time-clock-form.svelte';
 
 	export let users: UserType[];
 	export let issues: IssueType[];
 	export let projects: ProjectType[];
+	export let editor: { [key: string]: TimeClockType };
 
 	let filteredIssues: IssueType[] = [];
 
 	let filters: { [key: string]: string } = {};
 
 	const dispatch = createEventDispatcher();
+
+	let session: UserSessionType = get(userSession);
 
 	const toggleContent = () => {
 		const el = document.getElementById('time-clock-filter-content');
@@ -58,13 +65,54 @@
 		dispatch('filterTimeClocks', url.href);
 	};
 
+	const showOverlay = () => {
+		const overlay = document.getElementById('time-clocks-overlay');
+		if (overlay) overlay.classList.add('open');
+	};
+
+	const hideOverlay = () => {
+		const overlay = document.getElementById('time-clocks-overlay');
+		if (overlay) overlay.classList.remove('open');
+	};
+
+	const showNew = () => {
+		hideEdit();
+		showOverlay();
+		const dialog = document.getElementById('new-time-clock-dialog');
+		if (dialog) dialog.classList.add('open');
+	};
+
+	export const hideNew = () => {
+		const dialog = document.getElementById('new-time-clock-dialog');
+		if (dialog) dialog.classList.remove('open');
+		hideOverlay();
+	};
+
+	export const showEdit = () => {
+		hideNew();
+		showOverlay();
+		const dialog = document.getElementById('edit-time-clock-dialog');
+		if (dialog) dialog.classList.add('open');
+	};
+
+	export const hideEdit = () => {
+		const dialog = document.getElementById('edit-time-clock-dialog');
+		if (dialog) dialog.classList.remove('open');
+		hideOverlay();
+	};
+
 	onMount(() => {
 		filteredIssues = issues;
 	});
 </script>
 
 <div class="card" id="time-clock-filters">
-	<button on:click={toggleContent}>Filter</button>
+	<div class="flex flex-wrap">
+		<button on:click={toggleContent} class="mr-4">Filter</button>
+		{#if session.signedIn}
+			<button on:click={showNew}>New Time Clock</button>
+		{/if}
+	</div>
 	<div class="filter-content" id="time-clock-filter-content">
 		<div class="flex flex-wrap justify-between mb-2">
 			<div>
@@ -113,5 +161,20 @@
 				<button on:click={clearFilters}>Clear Filters</button>
 			</div>
 		</div>
+	</div>
+</div>
+
+<div class="modal-overlay" id="time-clocks-overlay">
+	<!-- new time clock -->
+	<div class="modal-50" id="new-time-clock-dialog">
+		<h2>New Time Clock</h2>
+		<TimeClockForm timeClock={editor.new} {users} {projects} {issues} />
+		<button on:click={hideNew}>Cancel</button>
+	</div>
+	<!-- edit time clock-->
+	<div class="modal-50" id="edit-time-clock-dialog">
+		<h2>Edit Time Clock</h2>
+		<TimeClockForm timeClock={editor.edit} {users} {projects} {issues} />
+		<button on:click={hideEdit}>Cancel</button>
 	</div>
 </div>
