@@ -13,4 +13,7 @@ export type IssueType = BaseModelType & {
 	Author?: UserType;
 	AssignedTo?: UserType;
 	Project?: ProjectType;
+	AuthorId?: string;
+	AssignedToId?: string;
+	ProjectId?: string;
 };

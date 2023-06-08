@@ -18,7 +18,8 @@ h3 {
 .dashboard-column {
 	@apply max-h-96 overflow-y-auto px-1;
 }
-.dashboard-main-content {
+.dashboard-main-content,
+.filter-content {
 	@apply my-1 border border-dotted border-slate-500 p-2 hidden;
 }
 .dashboard-details,
@@ -27,7 +28,8 @@ h3 {
 }
 .dashboard-main-content.open,
 .dashboard-details.open,
-.dashboard-description.open {
+.dashboard-description.open,
+.filter-content.open {
 	@apply block transition;
 }
 button.dashboard {
@@ -56,4 +58,8 @@ strong.dashboard {
 }
 .modal-50 textarea {
 	@apply border border-black rounded px-2 py-1 w-full h-24;
+}
+.modal-50 select,
+.filter-content select {
+	@apply border border-black rounded px-2 py-1;
 }
