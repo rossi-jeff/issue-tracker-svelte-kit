@@ -87,6 +87,17 @@
 		}
 	};
 
+	const createIssue = () => {
+		const issue = editor.new;
+		if (!issue.ProjectId) return;
+		dispatch('createIssue', { issue });
+	};
+
+	const updateIssue = () => {
+		const issue = editor.edit;
+		dispatch('updateIssue', { issue });
+	};
+
 	onMount(() => {
 		loadProjects();
 	});
@@ -170,7 +181,7 @@
 		<IssueForm issue={editor.new} {users} {projects} />
 		<div class="flex flex-wrap justify-between">
 			<button on:click={hideNew}>Cancel</button>
-			<button>Create Issue</button>
+			<button on:click={createIssue}>Create Issue</button>
 		</div>
 	</div>
 	<!-- edit issue -->
@@ -179,7 +190,7 @@
 		<IssueForm issue={editor.edit} {users} {projects} />
 		<div class="flex flex-wrap justify-between">
 			<button on:click={hideEdit}>Cancel</button>
-			<button>Update Issue</button>
+			<button on:click={updateIssue}>Update Issue</button>
 		</div>
 	</div>
 </div>

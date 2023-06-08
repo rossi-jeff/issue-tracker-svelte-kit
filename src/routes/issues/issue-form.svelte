@@ -16,6 +16,9 @@
 </script>
 
 <div class="my-2">
+	{#if issue.SequenceNumber}
+		<h3>{issue.SequenceNumber}</h3>
+	{/if}
 	<div class="mb-2">
 		<label for="project-id" class="font-bold block">Project</label>
 		<select name="project-id" class="w-full" bind:value={issue.ProjectId}>
