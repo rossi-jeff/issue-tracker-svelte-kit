@@ -3,6 +3,7 @@
 	import type { IssueType } from '../../types/issue.type';
 	import IssueCard from './issue-card.svelte';
 	import PaginationControls from '../../components/pagination-controls.svelte';
+	import IssueFilter from './issue-filter.svelte';
 
 	export let data;
 
@@ -11,6 +12,11 @@
 	let offset = 0;
 	let count = 0;
 	let showPagination = false;
+
+	const editor: { [key: string]: IssueType } = {
+		new: {},
+		edit: {}
+	};
 
 	const setPaginated = () => {
 		paginated = data.issues.slice(offset, offset + limit);
@@ -34,6 +40,19 @@
 		}, 25);
 	};
 
+	const filterIssues = async (ev: any) => {
+		const result = await fetch(ev.detail);
+		if (result.ok) {
+			data.issues = await result.json();
+			offset = 0;
+			count = data.issues.length;
+			showPagination = false;
+			setTimeout(() => {
+				setPaginated();
+			}, 25);
+		}
+	};
+
 	onMount(() => {
 		count = data.issues.length;
 		setTimeout(() => {
@@ -43,6 +62,8 @@
 </script>
 
 <h1>Issues</h1>
+
+<IssueFilter users={data.users} {editor} on:filterIssues={filterIssues} />
 
 {#each paginated as issue}
 	<IssueCard {issue} />
