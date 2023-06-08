@@ -3,6 +3,10 @@
 	import type { TimeClockType } from '../../types/time-clock.type';
 	import TimeClockCard from './time-clock-card.svelte';
 	import PaginationControls from '../../components/pagination-controls.svelte';
+	import type { UserType } from '../../types/user.type';
+	import type { IssueType } from '../../types/issue.type';
+	import type { ProjectType } from '../../types/project.type';
+	import TimeClockFilters from './time-clock-filters.svelte';
 
 	export let data;
 
@@ -11,6 +15,10 @@
 	let offset = 0;
 	let count = 0;
 	let showPagination = false;
+
+	let users: UserType[] = [];
+	let issues: IssueType[] = [];
+	let projects: ProjectType[] = [];
 
 	const setPaginated = () => {
 		paginated = data.timeclocks.slice(offset, offset + limit);
@@ -34,8 +42,24 @@
 		}, 25);
 	};
 
+	const filterTimeClocks = async (ev: any) => {
+		const result = await fetch(ev.detail);
+		if (result.ok) {
+			data.timeclocks = await result.json();
+			offset = 0;
+			count = data.timeclocks.length;
+			showPagination = false;
+			setTimeout(() => {
+				setPaginated();
+			}, 25);
+		}
+	};
+
 	onMount(() => {
 		count = data.timeclocks.length;
+		users = data.users;
+		issues = data.issues;
+		projects = data.projects;
 		setTimeout(() => {
 			setPaginated();
 		}, 25);
@@ -43,6 +67,8 @@
 </script>
 
 <h1>Time Clocks</h1>
+
+<TimeClockFilters {users} {issues} {projects} on:filterTimeClocks={filterTimeClocks} />
 
 {#each paginated as timeClock}
 	<TimeClockCard {timeClock} />
