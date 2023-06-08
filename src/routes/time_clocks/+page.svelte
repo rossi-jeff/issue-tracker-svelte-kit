@@ -9,6 +9,9 @@
 	import TimeClockFilters from './time-clock-filters.svelte';
 	import { userSession, type UserSessionType } from '../../lib/user-session.writable';
 	import { get } from 'svelte/store';
+	import { RemoveBlanks } from '$lib/remove-blanks';
+	import { apiUrl } from '$lib/api-url';
+	import { buildHeaders } from '$lib/build-headers';
 
 	export let data;
 
@@ -83,6 +86,43 @@
 
 	let hideEdit = () => {};
 
+	const createTimeClock = async (ev: any) => {
+		const timeClock: TimeClockType = ev.detail.timeClock;
+		const { Start, End, ...rest } = timeClock;
+		const sanitized = RemoveBlanks(rest, true);
+		const payload = { ...sanitized };
+		if (Start.Date && Start.Time) payload.Start = Start;
+		if (End.Date && End.Time) payload.End = End;
+		const result = await fetch(`${apiUrl}/timeclock`,{
+			method: 'POST',
+			body: JSON.stringify(payload),
+			headers: buildHeaders(session)
+		})
+		if (result.ok) {
+			await result.json();
+			hideNew()
+		} else hideNew();
+	};
+
+	const updateTimeClock = async (ev: any) => {
+		const timeClock: TimeClockType = ev.detail.timeClock;
+		const { Start, End, UUID, ...rest } = timeClock;
+		const sanitized = RemoveBlanks(rest, true);
+		const payload: any = { ...sanitized };
+		if (Start.Date && Start.Time) payload.Start = Start;
+		if (End.Date && End.Time) payload.End = End;
+		const result = await fetch(`${apiUrl}/timeclock/${UUID}`,{
+			method: 'PATCH',
+			body: JSON.stringify(payload),
+			headers: buildHeaders(session)
+		})
+		if (result.ok) {
+			await result.json();
+			hideEdit();
+		}
+		hideEdit();
+	};
+
 	onMount(() => {
 		count = data.timeclocks.length;
 		users = data.users;
@@ -102,6 +142,8 @@
 	{projects}
 	{editor}
 	on:filterTimeClocks={filterTimeClocks}
+	on:createTimeClock={createTimeClock}
+	on:updateTimeClock={updateTimeClock}
 	bind:showEdit
 	bind:hideEdit
 	bind:hideNew

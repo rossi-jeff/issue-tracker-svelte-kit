@@ -9,6 +9,7 @@
 	import { get } from 'svelte/store';
 	import type { TimeClockType } from '../../types/time-clock.type';
 	import TimeClockForm from './time-clock-form.svelte';
+	import NewTimeClockForm from './new-time-clock-form.svelte';
 
 	export let users: UserType[];
 	export let issues: IssueType[];
@@ -101,6 +102,16 @@
 		hideOverlay();
 	};
 
+	const createTimeClock = () => {
+		const timeClock = editor.new;
+		dispatch('createTimeClock', { timeClock });
+	};
+
+	const updateTimeClock = () => {
+		const timeClock = editor.edit;
+		dispatch('updateTimeClock', { timeClock });
+	};
+
 	onMount(() => {
 		filteredIssues = issues;
 	});
@@ -168,13 +179,19 @@
 	<!-- new time clock -->
 	<div class="modal-50" id="new-time-clock-dialog">
 		<h2>New Time Clock</h2>
-		<TimeClockForm timeClock={editor.new} {users} {projects} {issues} />
-		<button on:click={hideNew}>Cancel</button>
+		<NewTimeClockForm timeClock={editor.new} {users} {projects} {issues} />
+		<div class="flex flex-wrap justify-between">
+			<button on:click={hideNew}>Cancel</button>
+			<button on:click={createTimeClock}>Create Time Clock</button>
+		</div>
 	</div>
 	<!-- edit time clock-->
 	<div class="modal-50" id="edit-time-clock-dialog">
 		<h2>Edit Time Clock</h2>
 		<TimeClockForm timeClock={editor.edit} {users} {projects} {issues} />
-		<button on:click={hideEdit}>Cancel</button>
+		<div class="flex flex-wrap justify-between">
+			<button on:click={hideEdit}>Cancel</button>
+			<button on:click={updateTimeClock}>Update Time Clock</button>
+		</div>
 	</div>
 </div>
