@@ -64,3 +64,6 @@ strong.dashboard {
 .filter-content input {
 	@apply border border-black rounded px-2 py-1;
 }
+.dashboard-column.over {
+	@apply border-red-500 border rounded;
+}
