@@ -5,6 +5,9 @@
 	import { userSession, type UserSessionType } from '../../lib/user-session.writable.js';
 	import { get } from 'svelte/store';
 	import { clone } from '$lib/clone.js';
+	import { OtherStatusArray } from '../../types/array.types.js';
+	import { apiUrl } from '../../lib/api-url.js';
+	import { buildHeaders } from '../../lib/build-headers.js';
 
 	export let data;
 
@@ -16,6 +19,13 @@
 		accepted: [],
 		fixed: [],
 		other: []
+	};
+
+	let tmpStatus: { uuid: string; to: string; from: string; selected: string } = {
+		uuid: '',
+		to: '',
+		from: '',
+		selected: ''
 	};
 
 	const sortIssues = () => {
@@ -77,6 +87,12 @@
 			}
 			to = target.id.split('-')[1];
 		}
+		moveIssue(uuid, to, from);
+		issueStatusChange(uuid, to, from);
+	};
+
+	const moveIssue = (uuid: string, to: string, from: string) => {
+		if (!to || !from || !uuid) return;
 		let issue, idx;
 		switch (from) {
 			case 'New':
@@ -118,23 +134,106 @@
 		if (issue) {
 			switch (to) {
 				case 'New':
-					sorted.new.push(issue);
+					sorted.new.unshift(issue);
 					break;
 				case 'Assigned':
-					sorted.assigned.push(issue);
+					sorted.assigned.unshift(issue);
 					break;
 				case 'Accepted':
-					sorted.accepted.push(issue);
+					sorted.accepted.unshift(issue);
 					break;
 				case 'Fixed':
-					sorted.fixed.push(issue);
+					sorted.fixed.unshift(issue);
 					break;
 				case 'Other':
-					sorted.other.push(issue);
+					sorted.other.unshift(issue);
 					break;
 			}
 			sorted = clone(sorted);
 		}
+	};
+
+	const issueStatusChange = (uuid: string, to: string, from: string) => {
+		if (!to || !from || !uuid) return;
+		tmpStatus = { uuid, to, from, selected: '' };
+		if (to == 'Other') {
+			selectOtherStatus();
+		} else {
+			setIssueStatus();
+		}
+	};
+
+	const selectOtherStatus = () => {
+		const overlay = document.getElementById('other-status-overlay');
+		if (overlay) overlay.classList.add('open');
+		const dialog = document.getElementById('other-status-dialog');
+		if (dialog) dialog.classList.add('open');
+	};
+
+	const setOtherStatus = () => {
+		if (!tmpStatus.selected) return;
+		const overlay = document.getElementById('other-status-overlay');
+		if (overlay) overlay.classList.remove('open');
+		const dialog = document.getElementById('other-status-dialog');
+		if (dialog) dialog.classList.remove('open');
+		const issue = findDroppedIssue();
+		if (issue) {
+			issue.Status = tmpStatus.selected;
+			sorted = clone(sorted);
+			updateIssueStatus(issue);
+		}
+	};
+
+	const setIssueStatus = () => {
+		const issue = findDroppedIssue();
+		if (issue) {
+			issue.Status = tmpStatus.to;
+			sorted = clone(sorted);
+			updateIssueStatus(issue);
+		}
+	};
+
+	const findDroppedIssue = () => {
+		let issue = findIssueSwitch(tmpStatus.to);
+		if (!issue) {
+			// only if prior to move function
+			issue = findIssueSwitch(tmpStatus.from);
+		}
+		return issue;
+	};
+
+	const findIssueSwitch = (key: string) => {
+		let issue;
+		switch (key) {
+			case 'New':
+				issue = sorted.new.find((i) => i.UUID == tmpStatus.uuid);
+				break;
+			case 'Assigned':
+				issue = sorted.assigned.find((i) => i.UUID == tmpStatus.uuid);
+				break;
+			case 'Accepted':
+				issue = sorted.accepted.find((i) => i.UUID == tmpStatus.uuid);
+				break;
+			case 'Fixed':
+				issue = sorted.fixed.find((i) => i.UUID == tmpStatus.uuid);
+				break;
+			case 'Other':
+				issue = sorted.other.find((i) => i.UUID == tmpStatus.uuid);
+				break;
+		}
+		return issue;
+	};
+
+	const updateIssueStatus = async (issue: IssueType) => {
+		const { UUID, Status } = issue;
+		const result = await fetch(`${apiUrl}/issue/${UUID}`, {
+			method: 'PATCH',
+			body: JSON.stringify({ Status }),
+			headers: buildHeaders(session)
+		});
+		if (result.ok) {
+			await result.json();
+		} else console.log(result);
 	};
 
 	onMount(() => {
@@ -239,5 +338,26 @@
 				on:dragStart={dragStart}
 			/>
 		{/each}
+	</div>
+</div>
+
+<div class="modal-overlay" id="other-status-overlay">
+	<!-- select status from list of other-->
+	<div class="modal-sm" id="other-status-dialog">
+		<div class="dotted-box">
+			{#each OtherStatusArray as s}
+				<div>
+					<input
+						type="radio"
+						name="issue-status"
+						id="status-{s}"
+						value={s}
+						bind:group={tmpStatus.selected}
+					/>
+					<label for="status-{s}" class="font-bold ml-2">{s}</label>
+				</div>
+			{/each}
+		</div>
+		<button on:click={setOtherStatus}>Set Status</button>
 	</div>
 </div>

@@ -24,3 +24,12 @@ export const StatusArray = [
 	"Won't Fix (Infeasible)",
 	'Duplicate'
 ];
+
+export const OtherStatusArray = [
+	'Fixed (Verified)',
+	"Won't Fix (Not reproducible)",
+	"Won't Fix (Intended behavior)",
+	"Won't Fix (Obsolete)",
+	"Won't Fix (Infeasible)",
+	'Duplicate'
+];

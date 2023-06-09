@@ -47,9 +47,16 @@ strong.dashboard {
 .modal-50 {
 	@apply w-[50%] card bg-white mx-auto hidden relative top-24;
 }
+.modal-sm {
+	@apply max-w-fit card bg-white mx-auto hidden relative top-24;
+}
+.dotted-box {
+	@apply max-w-fit p-2 m-2 border-black border-dotted border rounded;
+}
 .modal-overlay.open,
 .modal-40.open,
-.modal-50.open {
+.modal-50.open,
+.modal-sm.open {
 	@apply block transition-all;
 }
 .modal-40 input,
