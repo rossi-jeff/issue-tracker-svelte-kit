@@ -6,6 +6,7 @@
 </script>
 
 <div class="card" id="user-{user.UUID}">
+	<a href="/users/{user.UUID}" class="mr-4">Details</a>
 	{#if user.Credentials}
 		<h2>{user.Credentials.Username}</h2>
 	{/if}
