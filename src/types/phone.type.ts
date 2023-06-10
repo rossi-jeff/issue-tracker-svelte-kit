@@ -6,3 +6,10 @@ export type PhoneType = BaseModelType & {
 	Type?: string;
 	Public?: boolean;
 };
+
+export const blankPhone: PhoneType = {
+	Number: '',
+	Usage: 'Personal',
+	Type: 'Cellular',
+	Public: false
+};

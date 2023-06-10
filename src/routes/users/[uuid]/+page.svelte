@@ -1,7 +1,10 @@
 <script lang="ts">
 	import { getFullName } from '../../../lib/get-full-name';
 	import type { UserType } from '../../../types/user.type';
+	import UserEmailList from '../user-email-list.svelte';
 	import UserForm from '../user-form.svelte';
+	import UserPhoneList from '../user-phone-list.svelte';
+	import UserRoles from '../user-roles.svelte';
 
 	export let data;
 	let user: UserType = data.user;
@@ -15,6 +18,19 @@
 	<div class="card">
 		<h1>Edit User</h1>
 		<UserForm {user} showPass={false} />
+		<UserRoles roles={user.Roles || []} />
+		<!--phones-->
+		<div class="flex flex-wrap">
+			<h3>Phones</h3>
+			<button class="ml-4">New Phone</button>
+		</div>
+		<UserPhoneList phones={user.Phones || []} />
+		<!--emails-->
+		<div class="flex flex-wrap">
+			<h3>Emails</h3>
+			<button class="ml-4">New Email</button>
+		</div>
+		<UserEmailList emails={user.Emails || []} />
 		<button>Update User</button>
 	</div>
 {:else}

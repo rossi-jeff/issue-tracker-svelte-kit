@@ -13,3 +13,11 @@ export type UserType = BaseModelType & {
 	Phones?: PhoneType[];
 	Roles?: RoleType[];
 };
+
+export const blankUser: UserType = {
+	Credentials: {},
+	Name: {},
+	Emails: [],
+	Phones: [],
+	Roles: []
+};

@@ -42,7 +42,10 @@
 	});
 </script>
 
-<h1>Users</h1>
+<div class="flex flex-wrap">
+	<h1>Users</h1>
+	<a href="/users/new" class="ml-4">New User</a>
+</div>
 
 {#each paginated as user}
 	<UserCard {user} />
