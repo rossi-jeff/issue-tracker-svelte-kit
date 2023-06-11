@@ -68,6 +68,8 @@ strong.dashboard {
 	@apply border border-black rounded px-2 py-1 w-full h-24;
 }
 .modal-50 select,
+.modal-sm select,
+.modal-sm input,
 .filter-content select,
 .filter-content input {
 	@apply border border-black rounded px-2 py-1;

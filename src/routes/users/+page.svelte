@@ -3,8 +3,12 @@
 	import type { UserType } from '../../types/user.type';
 	import UserCard from './user-card.svelte';
 	import PaginationControls from '../../components/pagination-controls.svelte';
+	import { userSession, type UserSessionType } from '$lib/user-session.writable';
+	import { get } from 'svelte/store';
 
 	export let data;
+
+	let session: UserSessionType = get(userSession);
 
 	let paginated: UserType[] = [];
 	let limit = 10;
@@ -44,7 +48,9 @@
 
 <div class="flex flex-wrap">
 	<h1>Users</h1>
-	<a href="/users/new" class="ml-4">New User</a>
+	{#if session.signedIn}
+		<a href="/users/new" class="ml-4">New User</a>
+	{/if}
 </div>
 
 {#each paginated as user}

@@ -5,9 +5,10 @@ import type { UserType } from '../../../types/user.type.js';
 
 export async function load({ fetch, params }) {
 	let user: UserType = {};
-	const result = await fetch(`${apiUrl}/user/${params.uuid}`, {
+	const { uuid } = params;
+	const result = await fetch(`${apiUrl}/user/${uuid}`, {
 		headers: buildHeaders(blankUserSession)
 	});
 	if (result.ok) user = await result.json();
-	return { user };
+	return { user, uuid };
 }
