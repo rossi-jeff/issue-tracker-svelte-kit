@@ -5,3 +5,9 @@ export type EmailType = BaseModelType & {
 	Usage?: string;
 	Public?: boolean;
 };
+
+export const blankEmail: EmailType = {
+	Address: '',
+	Usage: 'Personal',
+	Public: false
+};

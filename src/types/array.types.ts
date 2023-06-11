@@ -33,3 +33,9 @@ export const OtherStatusArray = [
 	"Won't Fix (Infeasible)",
 	'Duplicate'
 ];
+
+export const UserRoleArray = ['Developer', 'Support', 'Manager', 'Sales', 'EndUser'];
+
+export const UsageArray = ['Personal', 'Business'];
+
+export const PhoneTypeArray = ['Cellular', 'LandLine'];

@@ -60,13 +60,16 @@ strong.dashboard {
 	@apply block transition-all;
 }
 .modal-40 input,
-.modal-50 input {
+.modal-50 input,
+#user-form input {
 	@apply border border-black rounded px-2 py-1 w-full;
 }
 .modal-50 textarea {
 	@apply border border-black rounded px-2 py-1 w-full h-24;
 }
 .modal-50 select,
+.modal-sm select,
+.modal-sm input,
 .filter-content select,
 .filter-content input {
 	@apply border border-black rounded px-2 py-1;
