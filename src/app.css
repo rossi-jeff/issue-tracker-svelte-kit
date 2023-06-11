@@ -2,8 +2,43 @@
 @tailwind components;
 @tailwind utilities;
 
+#main {
+	@apply bg-light text-dark;
+}
+
+#main.dark {
+	@apply bg-dark text-light;
+}
+
 .card {
-	@apply border border-black rounded p-2 mb-2 min-w-fit;
+	@apply border border-altDark bg-altLight rounded p-2 mb-2 min-w-fit;
+}
+
+.dark .card {
+	@apply border-altLight bg-altDark;
+}
+
+input,
+select {
+	@apply bg-altLight text-altDark border border-altDark rounded py-1 px-2;
+}
+textarea {
+	@apply bg-altLight text-altDark border border-altDark rounded py-1 px-2;
+}
+.dark input,
+.dark select,
+.dark textarea {
+	@apply bg-altDark text-altLight border-altLight;
+}
+.card input,
+.card select,
+.card textarea {
+	@apply bg-light text-dark border-dark;
+}
+.dark .card input,
+.dark .card select,
+.dark .card textarea {
+	@apply bg-dark text-light border-light;
 }
 
 h1 {
@@ -51,28 +86,13 @@ strong.dashboard {
 	@apply max-w-fit card bg-white mx-auto hidden relative top-24;
 }
 .dotted-box {
-	@apply max-w-fit p-2 m-2 border-black border-dotted border rounded;
+	@apply max-w-fit p-2 m-2 border-dark text-dark bg-light border-dotted border rounded;
 }
 .modal-overlay.open,
 .modal-40.open,
 .modal-50.open,
 .modal-sm.open {
 	@apply block transition-all;
-}
-.modal-40 input,
-.modal-50 input,
-#user-form input {
-	@apply border border-black rounded px-2 py-1 w-full;
-}
-.modal-50 textarea {
-	@apply border border-black rounded px-2 py-1 w-full h-24;
-}
-.modal-50 select,
-.modal-sm select,
-.modal-sm input,
-.filter-content select,
-.filter-content input {
-	@apply border border-black rounded px-2 py-1;
 }
 .dashboard-column.over {
 	@apply border-red-500 border rounded;
