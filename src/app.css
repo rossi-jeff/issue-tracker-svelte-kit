@@ -23,7 +23,7 @@ select {
 	@apply bg-altLight text-altDark border border-altDark rounded py-1 px-2;
 }
 textarea {
-	@apply bg-altLight text-altDark border border-altDark rounded py-1 px-2;
+	@apply bg-altLight text-altDark border border-altDark rounded py-1 px-2 h-20;
 }
 .dark input,
 .dark select,

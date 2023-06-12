@@ -30,11 +30,11 @@
 	</div>
 	<div class="mb-2">
 		<label for="title" class="font-bold block">Title</label>
-		<input type="text" name="title" bind:value={issue.Title} />
+		<input type="text" class="w-full" name="title" bind:value={issue.Title} />
 	</div>
 	<div class="mb-2">
 		<label for="details" class="font-bold block">Details</label>
-		<textarea name="details" bind:value={issue.Details} />
+		<textarea name="details" class="w-full" bind:value={issue.Details} />
 	</div>
 	<div class="flex flex-wrap justify-between mb-2">
 		<div>
