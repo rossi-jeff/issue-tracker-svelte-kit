@@ -33,7 +33,7 @@
 		<div>
 			<div class="flex flex-wrap">
 				<h2>Issue</h2>
-				<div class="icon mx-2 mt-2">
+				<div class="icon mx-2 mt-1">
 					<FaList />
 				</div>
 				<h2>Tracker</h2>

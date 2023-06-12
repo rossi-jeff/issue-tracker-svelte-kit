@@ -14,6 +14,8 @@
 	import type { IssueType } from '../../types/issue.type';
 	import IssueForm from './issue-form.svelte';
 	import type { ProjectType } from '../../types/project.type';
+	import FaFilter from 'svelte-icons/fa/FaFilter.svelte';
+	import FaPlusCircle from 'svelte-icons/fa/FaPlusCircle.svelte';
 
 	export let users: UserType[];
 	export let editor: { [key: string]: IssueType };
@@ -105,9 +107,19 @@
 
 <div class="card" id="issue-filters">
 	<div class="flex flex-wrap">
-		<button on:click={toggleContent} class="mr-4">Filter</button>
+		<button on:click={toggleContent} class="mr-4">
+			<span class="icon-sm inline-block">
+				<FaFilter />
+			</span>
+			Filter
+		</button>
 		{#if session.signedIn}
-			<button on:click={showNew}>New Issue</button>
+			<button on:click={showNew}>
+				New Issue
+				<span class="icon-sm inline-block">
+					<FaPlusCircle />
+				</span>
+			</button>
 		{/if}
 	</div>
 	<div class="filter-content dotted-box" id="issue-filter-content">

@@ -2,6 +2,7 @@
 	import { createEventDispatcher } from 'svelte';
 	import type { ProjectType } from '../../types/project.type';
 	import ProjectForm from './project-form.svelte';
+	import FaPlusCircle from 'svelte-icons/fa/FaPlusCircle.svelte';
 
 	export let editor: { [key: string]: ProjectType };
 
@@ -52,7 +53,12 @@
 	};
 </script>
 
-<button on:click={showNew}>New Project</button>
+<button on:click={showNew} class="new-project">
+	New Project
+	<span class="icon-sm inline-block">
+		<FaPlusCircle />
+	</span>
+</button>
 
 <div class="modal-overlay" id="projects-overlay">
 	<!-- new project -->

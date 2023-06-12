@@ -9,6 +9,7 @@
 	import { get } from 'svelte/store';
 	import { apiUrl } from '../../lib/api-url';
 	import { buildHeaders } from '../../lib/build-headers';
+	import FaList from 'svelte-icons/fa/FaList.svelte';
 
 	export let data;
 
@@ -110,7 +111,12 @@
 	});
 </script>
 
-<h1>Issues</h1>
+<div class="flex flex-wrap">
+	<div class="icon mr-2 mt-1">
+		<FaList />
+	</div>
+	<h1>Issues</h1>
+</div>
 
 <IssueFilter
 	users={data.users}

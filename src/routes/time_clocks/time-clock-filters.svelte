@@ -10,6 +10,8 @@
 	import type { TimeClockType } from '../../types/time-clock.type';
 	import TimeClockForm from './time-clock-form.svelte';
 	import NewTimeClockForm from './new-time-clock-form.svelte';
+	import FaPlusCircle from 'svelte-icons/fa/FaPlusCircle.svelte';
+	import FaFilter from 'svelte-icons/fa/FaFilter.svelte';
 
 	export let users: UserType[];
 	export let issues: IssueType[];
@@ -119,9 +121,19 @@
 
 <div class="card" id="time-clock-filters">
 	<div class="flex flex-wrap">
-		<button on:click={toggleContent} class="mr-4">Filter</button>
+		<button on:click={toggleContent} class="mr-4">
+			<span class="icon-sm inline-block">
+				<FaFilter />
+			</span>
+			Filter
+		</button>
 		{#if session.signedIn}
-			<button on:click={showNew}>New Time Clock</button>
+			<button on:click={showNew}>
+				New Time Clock
+				<span class="icon-sm inline-block">
+					<FaPlusCircle />
+				</span>
+			</button>
 		{/if}
 	</div>
 	<div class="filter-content dotted-box" id="time-clock-filter-content">

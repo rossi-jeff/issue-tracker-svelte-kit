@@ -11,11 +11,13 @@
 }
 
 strong,
-a {
+a,
+button.new-project {
 	@apply text-altDark font-bold;
 }
 .dark strong,
-.dark a {
+.dark a,
+.dark button.new-project {
 	@apply text-altLight;
 }
 
@@ -86,7 +88,7 @@ h3 {
 .dashboard-details.open,
 .dashboard-description.open,
 .filter-content.open {
-	@apply block transition;
+	@apply block transition my-1;
 }
 button.dashboard {
 	@apply border text-left font-bold py-1 px-2 w-full mb-1 bg-dark text-light border-light rounded;
@@ -126,6 +128,9 @@ strong.dashboard {
 }
 .icon {
 	@apply w-5 h-5;
+}
+.icon-sm {
+	@apply w-4 h-4;
 }
 #header-bar h1,
 #footer-bar h2 {

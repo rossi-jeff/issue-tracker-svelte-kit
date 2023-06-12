@@ -5,6 +5,8 @@
 	import PaginationControls from '../../components/pagination-controls.svelte';
 	import { userSession, type UserSessionType } from '$lib/user-session.writable';
 	import { get } from 'svelte/store';
+	import FaUserFriends from 'svelte-icons/fa/FaUserFriends.svelte';
+	import FaPlusCircle from 'svelte-icons/fa/FaPlusCircle.svelte';
 
 	export let data;
 
@@ -47,9 +49,17 @@
 </script>
 
 <div class="flex flex-wrap">
+	<div class="icon mr-2 mt-1">
+		<FaUserFriends />
+	</div>
 	<h1>Users</h1>
 	{#if session.signedIn}
-		<a href="/users/new" class="ml-4">New User</a>
+		<a href="/users/new" class="ml-4">
+			New User
+			<span class="icon-sm inline-block">
+				<FaPlusCircle />
+			</span>
+		</a>
 	{/if}
 </div>
 
