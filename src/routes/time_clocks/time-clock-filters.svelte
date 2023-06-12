@@ -124,7 +124,7 @@
 			<button on:click={showNew}>New Time Clock</button>
 		{/if}
 	</div>
-	<div class="filter-content" id="time-clock-filter-content">
+	<div class="filter-content dotted-box" id="time-clock-filter-content">
 		<div class="flex flex-wrap justify-between mb-2">
 			<div>
 				<label for="user-id" class="font-bold block">Users</label>

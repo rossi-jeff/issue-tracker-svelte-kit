@@ -174,13 +174,13 @@
 		<h3>Phones</h3>
 		<button class="ml-4" on:click={showNewPhone}>New Phone</button>
 	</div>
-	<UserPhoneList phones={user.Phones || []} on:editPhone={editPhone} />
+	<UserPhoneList phones={user.Phones || []} on:editPhone={editPhone} showLinks={true} />
 	<!--emails-->
 	<div class="flex flex-wrap">
 		<h3>Emails</h3>
 		<button class="ml-4" on:click={showNewEmail}>New Email</button>
 	</div>
-	<UserEmailList emails={user.Emails || []} on:editEmail={editEmail} />
+	<UserEmailList emails={user.Emails || []} on:editEmail={editEmail} showLinks={true} />
 	<button on:click={registerUser}>Save User</button>
 </div>
 

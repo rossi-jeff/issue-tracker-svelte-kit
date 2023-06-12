@@ -219,25 +219,37 @@
 			<h3>Phones</h3>
 			<button class="ml-4" on:click={showNewPhone}>New Phone</button>
 		</div>
-		<UserPhoneList phones={user.Phones || []} on:editPhone={editPhone} />
+		<UserPhoneList phones={user.Phones || []} on:editPhone={editPhone} showLinks={true} />
 		<!--emails-->
 		<div class="flex flex-wrap">
 			<h3>Emails</h3>
 			<button class="ml-4" on:click={showNewEmail}>New Email</button>
 		</div>
-		<UserEmailList emails={user.Emails || []} on:editEmail={editEmail} />
+		<UserEmailList emails={user.Emails || []} on:editEmail={editEmail} showLinks={true} />
 		<button on:click={updateUser}>Update User</button>
 	</div>
 {:else}
-	<div class="card flex flex-wrap">
-		<div class="mr-6">
-			<strong>User Name</strong>
+	<div class="card">
+		<div class="mb-2">
+			<strong class="inline-block w-24">User Name</strong>
 			{user.Credentials ? user.Credentials.Username : 'N/A'}
 		</div>
-		<div>
-			<strong>Name</strong>
+		<div class="mb-2">
+			<strong class="inline-block w-24">Name</strong>
 			{getFullName(user)}
 		</div>
+		<div class="mb-2">
+			<strong class="inline-block w-24">Roles</strong>
+			{user.Roles && user.Roles.length > 0 ? user.Roles.join(', ') : 'N/A'}
+		</div>
+		{#if user.Phones && user.Phones.length > 0}
+			<h3>Phones</h3>
+		{/if}
+		<UserPhoneList phones={user.Phones || []} showLinks={false} />
+		{#if user.Emails && user.Emails.length > 0}
+			<h3>Emails</h3>
+		{/if}
+		<UserEmailList emails={user.Emails || []} showLinks={false} />
 	</div>
 {/if}
 

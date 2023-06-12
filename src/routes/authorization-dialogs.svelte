@@ -68,9 +68,9 @@
 	};
 </script>
 
-<div class="flex flex-wrap justify-end mx-4 my-2">
+<div class="flex flex-wrap justify-end">
 	{#if session.signedIn}
-		<strong>{session.UserName}</strong>
+		<a href="/users/{session.UUID}" class="mt-2">{session.UserName}</a>
 		<button on:click={signOut} class="ml-4">Sign Out</button>
 	{:else}
 		<button class="ml-4" on:click={showSignIn}>Sign In</button>
@@ -84,11 +84,11 @@
 		<div class="my-2">
 			<div class="mb-2">
 				<label for="user-name" class="font-bold block">User Name</label>
-				<input type="text" name="user-name" bind:value={credentials.Username} />
+				<input type="text" name="user-name" bind:value={credentials.Username} class="w-full" />
 			</div>
 			<div class="mb-2">
 				<label for="pass-word" class="font-bold block">Password</label>
-				<input type="password" name="pass-word" bind:value={credentials.Password} />
+				<input type="password" name="pass-word" bind:value={credentials.Password} class="w-full" />
 			</div>
 		</div>
 		<div class="flex flex-wrap justify-between">

@@ -4,6 +4,7 @@
 	import type { EmailType } from '../../types/email.type';
 
 	export let emails: EmailType[];
+	export let showLinks: boolean;
 
 	const dispatch = createEventDispatcher();
 
@@ -12,18 +13,39 @@
 	};
 </script>
 
-<div id="user-email-list">
+<div id="user-email-list" class="mb-2">
+	{#if emails.length > 0}
+		<div class="list-header">
+			{#if showLinks}
+				<div class="w-12">&nbsp;</div>
+			{/if}
+
+			<div class="w-32">Address</div>
+			<div class="w-16 text-center">Usage</div>
+			<div class="w-16 text-center">Public</div>
+
+			{#if showLinks}
+				<div class="w-12">&nbsp;</div>
+			{/if}
+		</div>
+	{/if}
 	{#each emails as email}
 		<div class="flex flex-wrap justify-between">
-			<div>
-				<button on:click={() => editEmail(email.UUID || '')}>Edit</button>
-			</div>
-			<div>{email.Public ? email.Address : maskedString(email.Address || '', 4)}</div>
-			<div>{email.Usage}</div>
-			<div>{email.Public}</div>
-			<div>
-				<button>Delete</button>
-			</div>
+			{#if showLinks}
+				<div class="w-12">
+					<button on:click={() => editEmail(email.UUID || '')}>Edit</button>
+				</div>
+			{/if}
+
+			<div class="w-32">{email.Public ? email.Address : maskedString(email.Address || '', 4)}</div>
+			<div class="w-16 text-center">{email.Usage}</div>
+			<div class="w-16 text-center">{email.Public}</div>
+
+			{#if showLinks}
+				<div class="w-12">
+					<button>Delete</button>
+				</div>
+			{/if}
 		</div>
 	{/each}
 </div>

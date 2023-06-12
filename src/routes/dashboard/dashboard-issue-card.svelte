@@ -4,8 +4,8 @@
 	import type { IssueType } from '../../types/issue.type';
 
 	export let issue: IssueType;
-	export let draggable: boolean
-	export let from: string
+	export let draggable: boolean;
+	export let from: string;
 
 	const dispatch = createEventDispatcher();
 
@@ -34,7 +34,7 @@
 	<button class="dashboard" on:click={() => toggleMain(issue.UUID || '')}
 		>{issue.SequenceNumber}</button
 	>
-	<div class="dashboard-main-content" id="dashboard-main-content-{issue.UUID}">
+	<div class="dashboard-main-content dotted-box" id="dashboard-main-content-{issue.UUID}">
 		<button class="dashboard" on:click={() => toggleDescription(issue.UUID || '')}
 			>Description</button
 		>
