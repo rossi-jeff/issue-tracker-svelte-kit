@@ -16,6 +16,8 @@
 	import type { ProjectType } from '../../types/project.type';
 	import FaFilter from 'svelte-icons/fa/FaFilter.svelte';
 	import FaPlusCircle from 'svelte-icons/fa/FaPlusCircle.svelte';
+	import FaSave from 'svelte-icons/fa/FaSave.svelte';
+	import FaBan from 'svelte-icons/fa/FaBan.svelte';
 
 	export let users: UserType[];
 	export let editor: { [key: string]: IssueType };
@@ -192,8 +194,18 @@
 		<h2>New Issue</h2>
 		<IssueForm issue={editor.new} {users} {projects} />
 		<div class="flex flex-wrap justify-between">
-			<button on:click={hideNew}>Cancel</button>
-			<button on:click={createIssue}>Create Issue</button>
+			<button on:click={hideNew}>
+				<span class="icon-sm inline-block">
+					<FaBan />
+				</span>
+				Cancel
+			</button>
+			<button on:click={createIssue}>
+				Create Issue
+				<span class="icon-sm inline-block">
+					<FaSave />
+				</span>
+			</button>
 		</div>
 	</div>
 	<!-- edit issue -->
@@ -201,8 +213,18 @@
 		<h2>Edit Issue</h2>
 		<IssueForm issue={editor.edit} {users} {projects} />
 		<div class="flex flex-wrap justify-between">
-			<button on:click={hideEdit}>Cancel</button>
-			<button on:click={updateIssue}>Update Issue</button>
+			<button on:click={hideEdit}>
+				<span class="icon-sm inline-block">
+					<FaBan />
+				</span>
+				Cancel
+			</button>
+			<button on:click={updateIssue}>
+				Update Issue
+				<span class="icon-sm inline-block">
+					<FaSave />
+				</span>
+			</button>
 		</div>
 	</div>
 </div>

@@ -3,6 +3,8 @@
 	import type { ProjectType } from '../../types/project.type';
 	import ProjectForm from './project-form.svelte';
 	import FaPlusCircle from 'svelte-icons/fa/FaPlusCircle.svelte';
+	import FaBan from 'svelte-icons/fa/FaBan.svelte';
+	import FaSave from 'svelte-icons/fa/FaSave.svelte';
 
 	export let editor: { [key: string]: ProjectType };
 
@@ -66,8 +68,18 @@
 		<h2>New Project</h2>
 		<ProjectForm project={editor.new} />
 		<div class="flex flex-wrap justify-between">
-			<button on:click={hideNew}>Cancel</button>
-			<button on:click={createProject}>Create Project</button>
+			<button on:click={hideNew}>
+				<span class="icon-sm inline-block">
+					<FaBan />
+				</span>
+				Cancel
+			</button>
+			<button on:click={createProject}>
+				Create Project
+				<span class="icon-sm inline-block">
+					<FaSave />
+				</span>
+			</button>
 		</div>
 	</div>
 	<!-- edit project -->
@@ -75,8 +87,18 @@
 		<h2>Edit Project</h2>
 		<ProjectForm project={editor.edit} />
 		<div class="flex flex-wrap justify-between">
-			<button on:click={hideEdit}>Cancel</button>
-			<button on:click={updateProject}>Update Project</button>
+			<button on:click={hideEdit}>
+				<span class="icon-sm inline-block">
+					<FaBan />
+				</span>
+				Cancel
+			</button>
+			<button on:click={updateProject}>
+				Update Project
+				<span class="icon-sm inline-block">
+					<FaSave />
+				</span>
+			</button>
 		</div>
 	</div>
 </div>

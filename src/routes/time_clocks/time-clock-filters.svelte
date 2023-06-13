@@ -12,6 +12,8 @@
 	import NewTimeClockForm from './new-time-clock-form.svelte';
 	import FaPlusCircle from 'svelte-icons/fa/FaPlusCircle.svelte';
 	import FaFilter from 'svelte-icons/fa/FaFilter.svelte';
+	import FaBan from 'svelte-icons/fa/FaBan.svelte';
+	import FaSave from 'svelte-icons/fa/FaSave.svelte';
 
 	export let users: UserType[];
 	export let issues: IssueType[];
@@ -193,8 +195,18 @@
 		<h2>New Time Clock</h2>
 		<NewTimeClockForm timeClock={editor.new} {users} {projects} {issues} />
 		<div class="flex flex-wrap justify-between">
-			<button on:click={hideNew}>Cancel</button>
-			<button on:click={createTimeClock}>Create Time Clock</button>
+			<button on:click={hideNew}>
+				<span class="icon-sm inline-block">
+					<FaBan />
+				</span>
+				Cancel
+			</button>
+			<button on:click={createTimeClock}>
+				Create Time Clock
+				<span class="icon-sm inline-block">
+					<FaSave />
+				</span>
+			</button>
 		</div>
 	</div>
 	<!-- edit time clock-->
@@ -202,8 +214,18 @@
 		<h2>Edit Time Clock</h2>
 		<TimeClockForm timeClock={editor.edit} {users} {projects} {issues} />
 		<div class="flex flex-wrap justify-between">
-			<button on:click={hideEdit}>Cancel</button>
-			<button on:click={updateTimeClock}>Update Time Clock</button>
+			<button on:click={hideEdit}>
+				<span class="icon-sm inline-block">
+					<FaBan />
+				</span>
+				Cancel
+			</button>
+			<button on:click={updateTimeClock}>
+				Update Time Clock
+				<span class="icon-sm inline-block">
+					<FaSave />
+				</span>
+			</button>
 		</div>
 	</div>
 </div>

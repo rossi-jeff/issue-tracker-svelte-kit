@@ -20,7 +20,7 @@
 				<div class="w-12">&nbsp;</div>
 			{/if}
 
-			<div class="w-32">Address</div>
+			<div class="w-48">Address</div>
 			<div class="w-16 text-center">Usage</div>
 			<div class="w-16 text-center">Public</div>
 
@@ -37,7 +37,7 @@
 				</div>
 			{/if}
 
-			<div class="w-32">{email.Public ? email.Address : maskedString(email.Address || '', 4)}</div>
+			<div class="w-48">{email.Public ? email.Address : maskedString(email.Address || '', 4)}</div>
 			<div class="w-16 text-center">{email.Usage}</div>
 			<div class="w-16 text-center">{email.Public}</div>
 
