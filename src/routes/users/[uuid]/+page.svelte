@@ -208,6 +208,10 @@
 	};
 </script>
 
+<svelte:head>
+	<title>Issue Tracker | User Details</title>
+</svelte:head>
+
 {#if session.signedIn}
 	<button on:click={() => (editing = !editing)}>
 		<span class="icon-sm inline-block">

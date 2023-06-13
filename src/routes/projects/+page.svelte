@@ -99,6 +99,10 @@
 	});
 </script>
 
+<svelte:head>
+	<title>Issue Tracker | Projects</title>
+</svelte:head>
+
 <div class="flex flex-wrap">
 	<div class="icon mr-2 mt-1">
 		<FaTools />

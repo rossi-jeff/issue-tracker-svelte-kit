@@ -167,6 +167,10 @@
 	};
 </script>
 
+<svelte:head>
+	<title>Issue Tracker | New User</title>
+</svelte:head>
+
 <div class="card">
 	<h1>New User</h1>
 	<UserForm {user} showPass={true} />

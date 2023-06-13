@@ -111,6 +111,10 @@
 	});
 </script>
 
+<svelte:head>
+	<title>Issue Tracker | Issues</title>
+</svelte:head>
+
 <div class="flex flex-wrap">
 	<div class="icon mr-2 mt-1">
 		<FaList />

@@ -9,6 +9,11 @@
 	} from '../lib/user-session.writable';
 	import type { CredentialsType } from '../types/credentials.type';
 	import { browser } from '$app/environment';
+	import FaUser from 'svelte-icons/fa/FaUser.svelte';
+	import FaSignOutAlt from 'svelte-icons/fa/FaSignOutAlt.svelte';
+	import FaSignInAlt from 'svelte-icons/fa/FaSignInAlt.svelte';
+	import FaBan from 'svelte-icons/fa/FaBan.svelte';
+
 	let credentials: CredentialsType = {};
 	let session: UserSessionType = get(userSession);
 
@@ -70,10 +75,25 @@
 
 <div class="flex flex-wrap justify-end">
 	{#if session.signedIn}
-		<a href="/users/{session.UUID}" class="mt-2">{session.UserName}</a>
-		<button on:click={signOut} class="ml-4">Sign Out</button>
+		<a href="/users/{session.UUID}" class="mt-2">
+			<span class="icon-sm inline-block">
+				<FaUser />
+			</span>
+			{session.UserName}
+		</a>
+		<button on:click={signOut} class="ml-4">
+			Sign Out
+			<span class="icon-sm inline-block">
+				<FaSignOutAlt />
+			</span>
+		</button>
 	{:else}
-		<button class="ml-4" on:click={showSignIn}>Sign In</button>
+		<button class="ml-4" on:click={showSignIn}>
+			<span class="icon-sm inline-block">
+				<FaSignInAlt />
+			</span>
+			Sign In
+		</button>
 	{/if}
 </div>
 
@@ -90,13 +110,28 @@
 				<label for="pass-word" class="font-bold block">Password</label>
 				<input type="password" name="pass-word" bind:value={credentials.Password} class="w-full" />
 			</div>
+			<div class="mt-2 text-black bg-yellow-200 border border-black rounded py-1 px-2">
+				Randomly generated users share the password <span class="my-1 px-2 py-1 bg-white rounded"
+					>S3cr3t!!</span
+				>
+			</div>
 		</div>
 		<div class="flex flex-wrap justify-between">
 			<div>
-				<button on:click={hideSignIn}> Cancel </button>
+				<button on:click={hideSignIn}>
+					<span class="icon-sm inline-block">
+						<FaBan />
+					</span>
+					Cancel
+				</button>
 			</div>
 			<div>
-				<button on:click={signIn}>Sign In</button>
+				<button on:click={signIn}>
+					Sign In
+					<span class="icon-sm inline-block">
+						<FaSignInAlt />
+					</span>
+				</button>
 			</div>
 		</div>
 	</div>

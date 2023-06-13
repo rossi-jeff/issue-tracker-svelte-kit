@@ -26,6 +26,10 @@ button:hover {
 	@apply underline;
 }
 
+ul {
+	@apply list-disc list-inside;
+}
+
 .card {
 	@apply border border-altDark bg-altLight rounded p-2 mb-2 min-w-fit;
 }
