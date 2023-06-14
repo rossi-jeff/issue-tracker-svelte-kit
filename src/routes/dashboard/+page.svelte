@@ -9,6 +9,7 @@
 	import { apiUrl } from '../../lib/api-url.js';
 	import { buildHeaders } from '../../lib/build-headers.js';
 	import IoMdGrid from 'svelte-icons/io/IoMdGrid.svelte';
+	import SignInAlert from '../../components/sign-in-alert.svelte';
 
 	export let data;
 
@@ -371,3 +372,7 @@
 		<button on:click={setOtherStatus}>Set Status</button>
 	</div>
 </div>
+
+{#if !session.signedIn}
+	<SignInAlert />
+{/if}

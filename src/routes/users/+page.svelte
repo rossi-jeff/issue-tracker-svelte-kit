@@ -7,6 +7,7 @@
 	import { get } from 'svelte/store';
 	import FaUserFriends from 'svelte-icons/fa/FaUserFriends.svelte';
 	import FaPlusCircle from 'svelte-icons/fa/FaPlusCircle.svelte';
+	import SignInAlert from '../../components/sign-in-alert.svelte';
 
 	export let data;
 
@@ -75,4 +76,8 @@
 
 {#if showPagination}
 	<PaginationControls {count} {offset} {limit} on:setPage={setPage} on:setPerPage={setPerPage} />
+{/if}
+
+{#if !session.signedIn}
+	<SignInAlert />
 {/if}

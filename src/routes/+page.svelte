@@ -12,6 +12,12 @@
 </div>
 
 <div class="mb-4">
+	In order to perform actions to edit data on the site you will need to sign in as one of the random
+	users. To do this select the username for the user you choose and the password noted on the
+	dialog.
+</div>
+
+<div class="mb-4">
 	Construction of this site used the component based framework <a
 		href="https://kit.svelte.dev/"
 		target="_blank">Svelte Kit</a
@@ -22,7 +28,7 @@
 </div>
 
 <div class="mb-4">
-	This site is one of four front end sites that share a common backend api. The font end sites are
+	This site is one of four front end sites that share a common backend api. The front end sites are
 	composed using the frameworks:
 	<ul>
 		<li><a href="https://react.dev/" target="_blank">React</a></li>

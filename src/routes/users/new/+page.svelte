@@ -16,6 +16,7 @@
 	import { buildHeaders } from '$lib/build-headers';
 	import FaBan from 'svelte-icons/fa/FaBan.svelte';
 	import FaSave from 'svelte-icons/fa/FaSave.svelte';
+	import SignInAlert from '../../../components/sign-in-alert.svelte';
 
 	type EditorType = {
 		newPhone: PhoneType;
@@ -196,6 +197,10 @@
 		</button>
 	</div>
 </div>
+
+{#if !session.signedIn}
+	<SignInAlert />
+{/if}
 
 <div class="modal-overlay" id="new-user-overlay">
 	<!--new phone dialog-->

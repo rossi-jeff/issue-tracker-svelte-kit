@@ -166,3 +166,9 @@ strong.dashboard {
 .dark .list-header {
 	@apply bg-light text-dark;
 }
+.sign-in-alert {
+	@apply bg-dark text-light font-bold py-2 px-4 my-4 rounded;
+}
+.dark .sign-in-alert {
+	@apply bg-light text-dark;
+}

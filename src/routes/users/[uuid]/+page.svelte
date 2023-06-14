@@ -17,6 +17,7 @@
 	import FaBan from 'svelte-icons/fa/FaBan.svelte';
 	import FaSave from 'svelte-icons/fa/FaSave.svelte';
 	import FaEdit from 'svelte-icons/fa/FaEdit.svelte';
+	import SignInAlert from '../../../components/sign-in-alert.svelte';
 
 	export let data;
 	let user: UserType = data.user;
@@ -270,6 +271,10 @@
 		{/if}
 		<UserEmailList emails={user.Emails || []} showLinks={false} />
 	</div>
+{/if}
+
+{#if !session.signedIn}
+	<SignInAlert />
 {/if}
 
 <div class="modal-overlay" id="edit-user-overlay">

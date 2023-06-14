@@ -22,7 +22,7 @@
 					<FaBars />
 				</button>
 				<h1>Issue</h1>
-				<div class="icon mx-2 mt-1">
+				<div class="icon mx-2 mt-2">
 					<FaList />
 				</div>
 				<h1>Tracker</h1>

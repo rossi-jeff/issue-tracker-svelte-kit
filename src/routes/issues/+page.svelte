@@ -10,6 +10,7 @@
 	import { apiUrl } from '../../lib/api-url';
 	import { buildHeaders } from '../../lib/build-headers';
 	import FaList from 'svelte-icons/fa/FaList.svelte';
+	import SignInAlert from '../../components/sign-in-alert.svelte';
 
 	export let data;
 
@@ -141,4 +142,8 @@
 
 {#if showPagination}
 	<PaginationControls {count} {offset} {limit} on:setPage={setPage} on:setPerPage={setPerPage} />
+{/if}
+
+{#if !session.signedIn}
+	<SignInAlert />
 {/if}
