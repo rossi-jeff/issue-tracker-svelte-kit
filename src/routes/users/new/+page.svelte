@@ -14,6 +14,8 @@
 	import { ulid } from 'ulid';
 	import { apiUrl } from '$lib/api-url';
 	import { buildHeaders } from '$lib/build-headers';
+	import FaBan from 'svelte-icons/fa/FaBan.svelte';
+	import FaSave from 'svelte-icons/fa/FaSave.svelte';
 
 	type EditorType = {
 		newPhone: PhoneType;
@@ -165,6 +167,10 @@
 	};
 </script>
 
+<svelte:head>
+	<title>Issue Tracker | New User</title>
+</svelte:head>
+
 <div class="card">
 	<h1>New User</h1>
 	<UserForm {user} showPass={true} />
@@ -174,59 +180,106 @@
 		<h3>Phones</h3>
 		<button class="ml-4" on:click={showNewPhone}>New Phone</button>
 	</div>
-	<UserPhoneList phones={user.Phones || []} on:editPhone={editPhone} />
+	<UserPhoneList phones={user.Phones || []} on:editPhone={editPhone} showLinks={true} />
 	<!--emails-->
 	<div class="flex flex-wrap">
 		<h3>Emails</h3>
 		<button class="ml-4" on:click={showNewEmail}>New Email</button>
 	</div>
-	<UserEmailList emails={user.Emails || []} on:editEmail={editEmail} />
-	<button on:click={registerUser}>Save User</button>
+	<UserEmailList emails={user.Emails || []} on:editEmail={editEmail} showLinks={true} />
+	<div class="text-right">
+		<button on:click={registerUser}>
+			Save User
+			<span class="icon-sm inline-block">
+				<FaSave />
+			</span>
+		</button>
+	</div>
 </div>
 
 <div class="modal-overlay" id="new-user-overlay">
 	<!--new phone dialog-->
 	<div class="modal-sm" id="new-phone-dialog">
 		<h2>New Phone</h2>
-		<div class="dotted-box">
+		<div class="dotted-box mb-2">
 			<PhoneForm phone={editor.newPhone} />
 		</div>
 		<div class="flex flex-wrap justify-between">
-			<button on:click={hideNewPhone}>Cancel</button>
-			<button on:click={addPhone}>Add Phone</button>
+			<button on:click={hideNewPhone}>
+				<span class="icon-sm inline-block">
+					<FaBan />
+				</span>
+				Cancel
+			</button>
+			<button on:click={addPhone}>
+				Add Phone
+				<span class="icon-sm inline-block">
+					<FaSave />
+				</span>
+			</button>
 		</div>
 	</div>
 	<!--edit phone dialog-->
 	<div class="modal-sm" id="edit-phone-dialog">
 		<h2>Edit Phone</h2>
-		<div class="dotted-box">
+		<div class="dotted-box mb-2">
 			<PhoneForm phone={editor.editPhone} />
 		</div>
 		<div class="flex flex-wrap justify-between">
-			<button on:click={hideEditPhone}>Cancel</button>
-			<button on:click={updatePhone}>Update Phone</button>
+			<button on:click={hideEditPhone}>
+				<span class="icon-sm inline-block">
+					<FaBan />
+				</span>
+				Cancel
+			</button>
+			<button on:click={updatePhone}>
+				Update Phone
+				<span class="icon-sm inline-block">
+					<FaSave />
+				</span>
+			</button>
 		</div>
 	</div>
 	<!--new email dialog-->
 	<div class="modal-sm" id="new-email-dialog">
 		<h2>New Email</h2>
-		<div class="dotted-box">
+		<div class="dotted-box mb-2">
 			<EmailForm email={editor.newEmail} />
 		</div>
 		<div class="flex flex-wrap justify-between">
-			<button on:click={hideNewEmail}>Cancel</button>
-			<button on:click={addEmail}>Add Email</button>
+			<button on:click={hideNewEmail}>
+				<span class="icon-sm inline-block">
+					<FaBan />
+				</span>
+				Cancel
+			</button>
+			<button on:click={addEmail}>
+				Add Email
+				<span class="icon-sm inline-block">
+					<FaSave />
+				</span>
+			</button>
 		</div>
 	</div>
 	<!--edit email dialog-->
 	<div class="modal-sm" id="edit-email-dialog">
 		<h2>Edit Email</h2>
-		<div class="dotted-box">
+		<div class="dotted-box mb-2">
 			<EmailForm email={editor.editEmail} />
 		</div>
 		<div class="flex flex-wrap justify-between">
-			<button on:click={hideEditEmail}>Cancel</button>
-			<button on:click={updateEmail}>Update Email</button>
+			<button on:click={hideEditEmail}>
+				<span class="icon-sm inline-block">
+					<FaBan />
+				</span>
+				Cancel
+			</button>
+			<button on:click={updateEmail}>
+				Update Email
+				<span class="icon-sm inline-block">
+					<FaSave />
+				</span>
+			</button>
 		</div>
 	</div>
 </div>

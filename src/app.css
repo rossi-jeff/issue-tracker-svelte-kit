@@ -10,6 +10,26 @@
 	@apply bg-dark text-light;
 }
 
+strong,
+a,
+button.new-project {
+	@apply text-altDark font-bold;
+}
+.dark strong,
+.dark a,
+.dark button.new-project {
+	@apply text-altLight;
+}
+
+a:hover,
+button:hover {
+	@apply underline;
+}
+
+ul {
+	@apply list-disc list-inside;
+}
+
 .card {
 	@apply border border-altDark bg-altLight rounded p-2 mb-2 min-w-fit;
 }
@@ -18,17 +38,24 @@
 	@apply border-altLight bg-altDark;
 }
 
+.card strong {
+	@apply text-dark;
+}
+.dark .card strong {
+	@apply text-light;
+}
+
 input,
 select {
-	@apply bg-altLight text-altDark border border-altDark rounded py-1 px-2;
+	@apply bg-dark text-light border border-altDark rounded py-1 px-2;
 }
 textarea {
-	@apply bg-altLight text-altDark border border-altDark rounded py-1 px-2;
+	@apply bg-dark text-light border border-altDark rounded py-1 px-2 h-20;
 }
 .dark input,
 .dark select,
 .dark textarea {
-	@apply bg-altDark text-altLight border-altLight;
+	@apply bg-light text-dark border-altLight;
 }
 .card input,
 .card select,
@@ -55,7 +82,7 @@ h3 {
 }
 .dashboard-main-content,
 .filter-content {
-	@apply my-1 border border-dotted border-slate-500 p-2 hidden;
+	@apply hidden;
 }
 .dashboard-details,
 .dashboard-description {
@@ -65,10 +92,13 @@ h3 {
 .dashboard-details.open,
 .dashboard-description.open,
 .filter-content.open {
-	@apply block transition;
+	@apply block transition my-1;
 }
 button.dashboard {
-	@apply bg-slate-200 border border-black text-left font-bold py-1 px-2 w-full mb-1;
+	@apply border text-left font-bold py-1 px-2 w-full mb-1 bg-dark text-light border-light rounded;
+}
+.dark button.dashboard {
+	@apply bg-light text-dark border-dark;
 }
 strong.dashboard {
 	@apply inline-block w-24;
@@ -86,7 +116,10 @@ strong.dashboard {
 	@apply max-w-fit card bg-white mx-auto hidden relative top-24;
 }
 .dotted-box {
-	@apply max-w-fit p-2 m-2 border-dark text-dark bg-light border-dotted border rounded;
+	@apply p-2 border-dark text-dark bg-light border-dotted border-2 rounded;
+}
+.dark .dotted-box {
+	@apply border-light text-light bg-dark;
 }
 .modal-overlay.open,
 .modal-40.open,
@@ -96,4 +129,40 @@ strong.dashboard {
 }
 .dashboard-column.over {
 	@apply border-red-500 border rounded;
+}
+.icon {
+	@apply w-5 h-5;
+}
+.icon-sm {
+	@apply w-4 h-4;
+}
+#header-bar h1,
+#footer-bar h2 {
+	@apply text-altDark;
+}
+.dark #header-bar h1,
+.dark #footer-bar h2 {
+	@apply text-altLight;
+}
+
+#side-panel {
+	@apply bg-dark text-light p-2 w-[16rem] fixed top-0 left-[-18rem] h-full z-10 overflow-x-hidden transition;
+}
+#side-bar-links a {
+	@apply block px-2 py-1 border-b border-dashed border-altDark;
+}
+.dark #side-panel {
+	@apply bg-light text-dark;
+}
+.dark #side-bar-links a {
+	@apply border-altLight;
+}
+#side-panel.open {
+	@apply left-0;
+}
+.list-header {
+	@apply bg-dark text-light font-bold flex flex-wrap justify-between py-1 px-2 rounded;
+}
+.dark .list-header {
+	@apply bg-light text-dark;
 }

@@ -8,6 +8,7 @@
 	import { get } from 'svelte/store';
 	import { apiUrl } from '../../lib/api-url';
 	import { buildHeaders } from '../../lib/build-headers';
+	import FaTools from 'svelte-icons/fa/FaTools.svelte';
 
 	export let data;
 
@@ -98,7 +99,14 @@
 	});
 </script>
 
+<svelte:head>
+	<title>Issue Tracker | Projects</title>
+</svelte:head>
+
 <div class="flex flex-wrap">
+	<div class="icon mr-2 mt-1">
+		<FaTools />
+	</div>
 	<h1 class="mr-4">Projects</h1>
 	{#if session.signedIn}
 		<ProjectDialogs

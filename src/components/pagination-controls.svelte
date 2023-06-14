@@ -1,5 +1,9 @@
 <script lang="ts">
 	import { createEventDispatcher, onMount } from 'svelte';
+	import FaAngleDoubleLeft from 'svelte-icons/fa/FaAngleDoubleLeft.svelte';
+	import FaAngleLeft from 'svelte-icons/fa/FaAngleLeft.svelte';
+	import FaAngleRight from 'svelte-icons/fa/FaAngleRight.svelte';
+	import FaAngleDoubleRight from 'svelte-icons/fa/FaAngleDoubleRight.svelte';
 
 	export let count: number;
 	export let limit: number;
@@ -76,9 +80,13 @@
 
 <div class="card">
 	<div class="flex flex-wrap justify-between">
-		<div>
-			<button on:click={firstPage}> |&lt; </button>
-			<button on:click={previousPage}> &lt; </button>
+		<div class="mt-2">
+			<button on:click={firstPage} class="icon" title="First Page">
+				<FaAngleDoubleLeft />
+			</button>
+			<button on:click={previousPage} class="icon" title="Previous Page">
+				<FaAngleLeft />
+			</button>
 		</div>
 		<div>
 			<label for="per-page">Per Page</label>
@@ -99,9 +107,13 @@
 				{/each}
 			</select>
 		</div>
-		<div>
-			<button on:click={nextPage}> &gt; </button>
-			<button on:click={lastPage}> &gt;| </button>
+		<div class="mt-2">
+			<button on:click={nextPage} class="icon" title="Next Page">
+				<FaAngleRight />
+			</button>
+			<button on:click={lastPage} class="icon" title="Last Page">
+				<FaAngleDoubleRight />
+			</button>
 		</div>
 	</div>
 </div>

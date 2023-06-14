@@ -14,6 +14,10 @@
 	import type { IssueType } from '../../types/issue.type';
 	import IssueForm from './issue-form.svelte';
 	import type { ProjectType } from '../../types/project.type';
+	import FaFilter from 'svelte-icons/fa/FaFilter.svelte';
+	import FaPlusCircle from 'svelte-icons/fa/FaPlusCircle.svelte';
+	import FaSave from 'svelte-icons/fa/FaSave.svelte';
+	import FaBan from 'svelte-icons/fa/FaBan.svelte';
 
 	export let users: UserType[];
 	export let editor: { [key: string]: IssueType };
@@ -105,12 +109,22 @@
 
 <div class="card" id="issue-filters">
 	<div class="flex flex-wrap">
-		<button on:click={toggleContent} class="mr-4">Filter</button>
+		<button on:click={toggleContent} class="mr-4">
+			<span class="icon-sm inline-block">
+				<FaFilter />
+			</span>
+			Filter
+		</button>
 		{#if session.signedIn}
-			<button on:click={showNew}>New Issue</button>
+			<button on:click={showNew}>
+				New Issue
+				<span class="icon-sm inline-block">
+					<FaPlusCircle />
+				</span>
+			</button>
 		{/if}
 	</div>
-	<div class="filter-content" id="issue-filter-content">
+	<div class="filter-content dotted-box" id="issue-filter-content">
 		<div class="flex flex-wrap justify-between">
 			<div>
 				<label for="priority" class="font-bold block">Priority</label>
@@ -180,8 +194,18 @@
 		<h2>New Issue</h2>
 		<IssueForm issue={editor.new} {users} {projects} />
 		<div class="flex flex-wrap justify-between">
-			<button on:click={hideNew}>Cancel</button>
-			<button on:click={createIssue}>Create Issue</button>
+			<button on:click={hideNew}>
+				<span class="icon-sm inline-block">
+					<FaBan />
+				</span>
+				Cancel
+			</button>
+			<button on:click={createIssue}>
+				Create Issue
+				<span class="icon-sm inline-block">
+					<FaSave />
+				</span>
+			</button>
 		</div>
 	</div>
 	<!-- edit issue -->
@@ -189,8 +213,18 @@
 		<h2>Edit Issue</h2>
 		<IssueForm issue={editor.edit} {users} {projects} />
 		<div class="flex flex-wrap justify-between">
-			<button on:click={hideEdit}>Cancel</button>
-			<button on:click={updateIssue}>Update Issue</button>
+			<button on:click={hideEdit}>
+				<span class="icon-sm inline-block">
+					<FaBan />
+				</span>
+				Cancel
+			</button>
+			<button on:click={updateIssue}>
+				Update Issue
+				<span class="icon-sm inline-block">
+					<FaSave />
+				</span>
+			</button>
 		</div>
 	</div>
 </div>

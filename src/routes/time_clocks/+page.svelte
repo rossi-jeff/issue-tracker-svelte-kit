@@ -12,6 +12,7 @@
 	import { RemoveBlanks } from '$lib/remove-blanks';
 	import { apiUrl } from '$lib/api-url';
 	import { buildHeaders } from '$lib/build-headers';
+	import FaRegClock from 'svelte-icons/fa/FaRegClock.svelte';
 
 	export let data;
 
@@ -93,14 +94,14 @@
 		const payload = { ...sanitized };
 		if (Start.Date && Start.Time) payload.Start = Start;
 		if (End.Date && End.Time) payload.End = End;
-		const result = await fetch(`${apiUrl}/timeclock`,{
+		const result = await fetch(`${apiUrl}/timeclock`, {
 			method: 'POST',
 			body: JSON.stringify(payload),
 			headers: buildHeaders(session)
-		})
+		});
 		if (result.ok) {
 			await result.json();
-			hideNew()
+			hideNew();
 		} else hideNew();
 	};
 
@@ -111,11 +112,11 @@
 		const payload: any = { ...sanitized };
 		if (Start.Date && Start.Time) payload.Start = Start;
 		if (End.Date && End.Time) payload.End = End;
-		const result = await fetch(`${apiUrl}/timeclock/${UUID}`,{
+		const result = await fetch(`${apiUrl}/timeclock/${UUID}`, {
 			method: 'PATCH',
 			body: JSON.stringify(payload),
 			headers: buildHeaders(session)
-		})
+		});
 		if (result.ok) {
 			await result.json();
 			hideEdit();
@@ -134,7 +135,16 @@
 	});
 </script>
 
-<h1>Time Clocks</h1>
+<svelte:head>
+	<title>Issue Tracker | Time Clocks</title>
+</svelte:head>
+
+<div class="flex flex-wrap">
+	<div class="icon mr-2 mt-1">
+		<FaRegClock />
+	</div>
+	<h1>Time Clocks</h1>
+</div>
 
 <TimeClockFilters
 	{users}

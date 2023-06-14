@@ -8,6 +8,7 @@
 	import { OtherStatusArray } from '../../types/array.types.js';
 	import { apiUrl } from '../../lib/api-url.js';
 	import { buildHeaders } from '../../lib/build-headers.js';
+	import IoMdGrid from 'svelte-icons/io/IoMdGrid.svelte';
 
 	export let data;
 
@@ -241,7 +242,16 @@
 	});
 </script>
 
-<h1>Dashboard</h1>
+<svelte:head>
+	<title>Issue Tracker | Dashboard</title>
+</svelte:head>
+
+<div class="flex flex-wrap">
+	<div class="icon mr-2 mt-1">
+		<IoMdGrid />
+	</div>
+	<h1>Dashboard</h1>
+</div>
 
 <div class="flex flex-wrap justify-between">
 	<div class="w-[23%]">

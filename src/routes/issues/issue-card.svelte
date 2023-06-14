@@ -4,6 +4,7 @@
 	import { userSession, type UserSessionType } from '../../lib/user-session.writable';
 	import type { IssueType } from '../../types/issue.type';
 	import { createEventDispatcher } from 'svelte';
+	import FaEdit from 'svelte-icons/fa/FaEdit.svelte';
 
 	export let issue: IssueType;
 
@@ -20,7 +21,11 @@
 <div class="card" id="issue-{issue.UUID}">
 	<div class="flex flex-wrap">
 		{#if session.signedIn}
-			<button class="mr-2" on:click={editIssue}>Edit</button>
+			<button class="mr-2" on:click={editIssue} title="Edit {issue.SequenceNumber}">
+				<span class="icon inline-block">
+					<FaEdit />
+				</span>
+			</button>
 		{/if}
 		<h2>{issue.SequenceNumber}</h2>
 	</div>
@@ -31,7 +36,7 @@
 			{issue.Project.Name}
 		</div>
 	{/if}
-	<div class="flex flex-wrap justify-between">
+	<div class="md:flex md:flex-wrap md:justify-between">
 		<div>
 			<strong class="mr-4">Priority</strong>
 			{issue.Priority}
@@ -50,7 +55,7 @@
 		</div>
 	</div>
 	<div>{issue.Details}</div>
-	<div class="flex flex-wrap justify-between">
+	<div class="md:flex md:flex-wrap md:justify-between">
 		<div>
 			<strong class="mr-4">Created</strong>
 			{issue.Created}
